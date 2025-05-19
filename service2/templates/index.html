@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Service 2</title>
-</head>
 <body>
-    <h1>Welcome to Service 2</h1>
-    <p>This is the second microservice.</p>
-    <a href="{{ other_service_url }}">Go to Service 1</a>
+    <h1>Service 2</h1>
+    {% if user_data %}
+        <p>Welcome, {{ user_data.username }}!</p>
+        <form method="POST" action="/protected">
+            <input type="hidden" name="token" value="{{ token }}">
+            <button type="submit">Go to Protected Page</button>
+        </form>
+    {% else %}
+        <p>Please <a href="http://localhost:5000/login">login</a> to access protected content.</p>
+    {% endif %}
 </body>
 </html>

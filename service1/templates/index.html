@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Service 1</title>
-</head>
 <body>
-    <h1>Welcome to Service 1</h1>
-    <p>This is the first microservice.</p>
-    <a href="{{ other_service_url }}">Go to Service 2</a>
+    <h1>Service 1</h1>
+    {% if user_data %}
+        <p>Welcome, {{ user_data.username }}!</p>
+        <a href="/user?token={{ token }}">Go to User Page</a>
+        <form method="POST" action="http://service2:5000">
+            <input type="hidden" name="token" value="{{ token }}">
+            <button type="submit">Go to Service 2</button>
+        </form>
+    {% else %}
+        <p>Please <a href="/login">login</a> or <a href="/register">register</a>.</p>
+    {% endif %}
 </body>
 </html>
